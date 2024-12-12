@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl =env("SHADOW_DATABASE_URL")
+}
+
+model Cliente {
+  id_cliente  Int                 @id @default(autoincrement())
+  nombre      String
+  telefono    String              @unique
+  email       String              @unique
+  direccion   String?
+  vehiculos   Vehiculo[]
+  tareas      Tarea[]
+  historiales HistorialServicio[] @relation("ClienteHistorial")
+}
+
+model Vehiculo {
+  id_vehiculo Int       @id @default(autoincrement())
+  id_cliente  Int
+  marca       String
+  modelo      String
+  anio        Int
+  patente     String
+
+  cliente     Cliente   @relation(fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction)
+  tareas      Tarea[]
+}
+
+model Tarea {
+  id_tarea      Int                 @id @default(autoincrement())
+  id_cliente    Int
+  id_empleado   Int
+  id_vehiculo   Int
+  fecha_hora    DateTime
+  estado        String
+  descripcion   String?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  cliente       Cliente             @relation(fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction)
+  empleado      Empleado            @relation(fields: [id_empleado], references: [id_empleado])
+  vehiculo      Vehiculo            @relation(fields: [id_vehiculo], references: [id_vehiculo])
+  historial     HistorialServicio[]
+}
+
+model HistorialServicio {
+  id_historial Int       @id @default(autoincrement())
+  id_tarea     Int
+  id_cliente   Int
+  costo        Float
+  fecha        DateTime
+  detalle      String
+
+  tarea        Tarea     @relation(fields: [id_tarea], references: [id_tarea], onDelete: Cascade)
+  cliente      Cliente   @relation("ClienteHistorial", fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Empleado {
+  id_empleado    Int             @id @default(autoincrement())
+  nombre         String
+  rol            String
+  telefono       String
+  email          String          @unique
+  password       String
+  tareas         Tarea[]
+}
+
