@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 
 const ReporteProductividad = () => {
@@ -6,7 +6,8 @@ const ReporteProductividad = () => {
   const [inicio, setInicio] = useState('');
   const [fin, setFin] = useState('');
 
-  const fetchReporte = async () => {
+  // Función para obtener el reporte, memoizada con useCallback
+  const fetchReporte = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.get('http://localhost:5000/api/reportes', {
@@ -17,17 +18,19 @@ const ReporteProductividad = () => {
     } catch (error) {
       console.error('Error al obtener el reporte de productividad:', error);
     }
-  };
+  }, [inicio, fin]);
 
+  // useEffect para ejecutar fetchReporte cuando cambian inicio o fin
   useEffect(() => {
     if (inicio && fin) {
       fetchReporte();
     }
-  }, [inicio, fin]);
+  }, [inicio, fin, fetchReporte]);
 
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold text-naranja mb-4">Historial servicios por empleado</h2>
+      {/* Filtros de fecha */}
       <div className="flex mb-4">
         <input
           type="date"
@@ -42,6 +45,7 @@ const ReporteProductividad = () => {
           className="p-2 border border-gray-300 rounded"
         />
       </div>
+      {/* Tabla de resultados */}
       <table className="min-w-full bg-white">
         <thead>
           <tr>
