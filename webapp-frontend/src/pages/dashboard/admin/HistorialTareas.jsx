@@ -60,10 +60,10 @@ const HistorialTareas = () => {
 
       try {
         setLoading(true);
-        const empleadosResponse = await axios.get('http://localhost:5000/api/empleados/historial', {
+        const empleadosResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/empleados/historial`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        const tareasResponse = await axios.get('http://localhost:5000/api/tareas/historial', {
+        const tareasResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/tareas/historial`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -90,7 +90,7 @@ const HistorialTareas = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/tareas/historial/${tareaId}/asignar`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/tareas/historial/${tareaId}/asignar`,
         { empleadoId },
         { headers: { Authorization: `Bearer ${token}` } }
       );

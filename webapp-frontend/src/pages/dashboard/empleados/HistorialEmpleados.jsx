@@ -18,7 +18,7 @@ const HistorialEmpleado = () => {
       }
 
       try {
-        const response = await axios.get('http://localhost:5000/api/empleados/historial', {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/empleados/historial`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setEmpleados(response.data);
@@ -44,7 +44,7 @@ const HistorialEmpleado = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/empleados/${selectedEmpleadoId}/tareas`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/empleados/${selectedEmpleadoId}/tareas`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

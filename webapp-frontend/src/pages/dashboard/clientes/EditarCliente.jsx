@@ -30,7 +30,7 @@ const EditarCliente = () => {
       }
 
       try {
-        const clientesResponse = await axios.get('http://localhost:5000/api/clientes/', {
+        const clientesResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/clientes/`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setClientes(clientesResponse.data);
@@ -64,7 +64,7 @@ const EditarCliente = () => {
         });
 
         const vehiculoResponse = await axios.get(
-          `http://localhost:5000/api/vehiculos/lista/${clientId}`,
+          `${process.env.REACT_APP_BACKEND_URL}/api/vehiculos/lista/${clientId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -117,7 +117,7 @@ const EditarCliente = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/clientes/editar/${selectedClientId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/clientes/editar/${selectedClientId}`,
         { ...formData },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -125,7 +125,7 @@ const EditarCliente = () => {
       );
 
       await axios.put(
-        `http://localhost:5000/api/vehiculos/editar/${vehiculoData.id_vehiculo}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/vehiculos/editar/${vehiculoData.id_vehiculo}`,
         { ...vehiculoData },
         {
           headers: { Authorization: `Bearer ${token}` },

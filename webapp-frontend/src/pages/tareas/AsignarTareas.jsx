@@ -22,7 +22,7 @@ const AsignarTareas = () => {
   const fetchEmpleados = async () => {
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.get('http://localhost:5000/api/empleados', {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/empleados`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEmpleados(response.data);
@@ -35,7 +35,7 @@ const AsignarTareas = () => {
   const fetchTareas = async () => {
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.get('http://localhost:5000/api/tareas', {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/tareas`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTareas(response.data);
@@ -73,7 +73,7 @@ const AsignarTareas = () => {
   
     const token = localStorage.getItem('token');
     try {
-      await axios.post('http://localhost:5000/api/tareas', formData, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/tareas`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSuccess('Tarea creada y asignada exitosamente.');

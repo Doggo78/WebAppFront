@@ -18,7 +18,7 @@ const HistorialClientes = () => {
       }
 
       try {
-        const response = await axios.get('http://localhost:5000/api/clientes', {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/clientes`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setClientes(response.data);
@@ -40,13 +40,13 @@ const HistorialClientes = () => {
     }
 
     try {
-      const clienteResponse = await axios.get(`http://localhost:5000/api/clientes/${clienteId}`, {
+      const clienteResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/clientes/${clienteId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSelectedCliente(clienteResponse.data);
 
       const vehiculosResponse = await axios.get(
-        `http://localhost:5000/api/clientes/${clienteId}/vehiculos`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/clientes/${clienteId}/vehiculos`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -54,7 +54,7 @@ const HistorialClientes = () => {
       setVehiculos(vehiculosResponse.data);
 
       const tareasResponse = await axios.get(
-        `http://localhost:5000/api/clientes/${clienteId}/tareas`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/clientes/${clienteId}/tareas`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

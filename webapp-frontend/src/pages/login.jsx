@@ -35,7 +35,7 @@ const Login = () => {
       setError('');
 
       // Hacer la solicitud al backend
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
         username,
         password,
       });

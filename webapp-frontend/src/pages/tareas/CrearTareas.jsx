@@ -23,12 +23,12 @@ const CrearTarea = () => {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
       try {
-        const clientesRes = await axios.get('http://localhost:5000/api/clientes', {
+        const clientesRes = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/clientes`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setClientes(clientesRes.data);
 
-        const empleadosRes = await axios.get('http://localhost:5000/api/empleados', {
+        const empleadosRes = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/empleados`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setEmpleados(empleadosRes.data);
@@ -47,7 +47,7 @@ const CrearTarea = () => {
     if (value) {
       const token = localStorage.getItem('token');
       try {
-        const vehiculosRes = await axios.get(`http://localhost:5000/api/vehiculos/${value}`, {
+        const vehiculosRes = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/vehiculos/${value}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setVehiculos(vehiculosRes.data);
@@ -78,7 +78,7 @@ const CrearTarea = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/tareas/crear', tareaData, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/tareas/crear`, tareaData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSuccess('Tarea creada exitosamente.');

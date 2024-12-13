@@ -64,7 +64,7 @@ const RegistroEmpleados = () => {
 
       // Enviar datos al backend
       await axios.post(
-        'http://localhost:5000/api/auth/register',
+        `${process.env.REACT_APP_BACKEND_URL}/api/auth/register`,
         {
           nombre: formData.nombre,
           telefono: formData.telefono,

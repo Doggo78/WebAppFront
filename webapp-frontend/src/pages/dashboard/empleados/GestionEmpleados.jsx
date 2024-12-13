@@ -20,7 +20,7 @@ const GestionarEmpleado = () => {
   const fetchEmpleados = async () => {
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.get('http://localhost:5000/api/empleados', {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/empleados`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEmpleados(response.data);
@@ -34,7 +34,7 @@ const GestionarEmpleado = () => {
   const eliminarEmpleado = async (id_empleado) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:5000/api/empleados/${id_empleado}/gestion`, {
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/empleados/${id_empleado}/gestion`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSuccess('Empleado eliminado exitosamente.');
@@ -67,7 +67,7 @@ const GestionarEmpleado = () => {
     const token = localStorage.getItem('token');
     try {
       await axios.put(
-        `http://localhost:5000/api/empleados/${editEmpleado.id_empleado}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/empleados/${editEmpleado.id_empleado}`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },

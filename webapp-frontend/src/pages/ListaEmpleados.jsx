@@ -14,7 +14,7 @@ const ListaEmpleados = () => {
           setError('No estás autenticado.');
           return;
         }
-        const response = await axios.get('http://localhost:5000/api/users/empleados', {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/empleados`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setEmpleados(response.data);

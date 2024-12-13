@@ -10,7 +10,7 @@ const ReporteProductividad = () => {
   const fetchReporte = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/reportes', {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/reportes`, {
         params: { inicio, fin },
         headers: { Authorization: `Bearer ${token}` },
       });

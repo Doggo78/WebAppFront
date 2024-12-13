@@ -15,7 +15,7 @@ const ListaClientes = () => {
         return;
       }
       try {
-        const response = await axios.get('http://localhost:5000/api/clientes/lista', {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/clientes/lista`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setClientes(response.data);

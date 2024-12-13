@@ -69,7 +69,7 @@ const RegistroCliente = () => {
   
       // Crear cliente
       const clienteResponse = await axios.post(
-        'http://localhost:5000/api/clientes/crear',
+        `${process.env.REACT_APP_BACKEND_URL}/api/clientes/crear`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -80,7 +80,7 @@ const RegistroCliente = () => {
   
       // Crear vehículo asociado al cliente
       await axios.post(
-        'http://localhost:5000/api/vehiculos/crear',
+        `${process.env.REACT_APP_BACKEND_URL}/api/vehiculos/crear`,
         { ...vehiculoData, id_cliente: cliente.id_cliente },
         {
           headers: { Authorization: `Bearer ${token}` },
