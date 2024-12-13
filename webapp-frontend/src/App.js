@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Home from './pages/Home';
 import PrivateRoute from './components/PrivateRoute';
 //INTERFAZ ADMIN/EMPLEADO
-import EmployeeDashboard from './pages/dashboard/empleados/EmployeeDashboard';
 import EmpleadoLayout from './pages/layouts/EmpleadoLayout';
 import AdminLayout from './pages/layouts/AdminLayout';
 //LOGIN

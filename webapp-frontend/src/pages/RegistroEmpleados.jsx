@@ -1,10 +1,7 @@
-// src/pages/RegistroEmpleados.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const RegistroEmpleados = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nombre: '',
     telefono: '',
@@ -89,7 +86,7 @@ const RegistroEmpleados = () => {
         confirmPassword: '',
       });
 
-      // Redirigir a la lista de empleados o a otra página si es necesario
+      // Redirigir si es necesario
       // setTimeout(() => navigate('/empleados/lista'), 2000);
     } catch (error) {
       console.error('Error al registrar empleado:', error);
@@ -119,7 +116,7 @@ const RegistroEmpleados = () => {
         </div>
         {/* Teléfono */}
         <div className="mb-4">
-          <label className="block text-celeste font-bold mb-2">Telefono:</label>
+          <label className="block text-celeste font-bold mb-2">Teléfono:</label>
           <input
             type="text"
             name="telefono"
